@@ -1,0 +1,17 @@
+{
+  "name": "react-cards",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "phodgson@thoughtworks.com",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "~3.8.10",
+    "gulp-react": "~2.0.0",
+    "react": "~0.12.2",
+    "gulp-concat": "~2.4.2",
+    "del": "~1.1.0"
+  }
+}
