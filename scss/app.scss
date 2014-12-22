@@ -1,3 +1,5 @@
+@import "bourbon";
+
 $background-color: #eee;
 $dark-gray: lighten(black,30%);
 $dark-white: darken(white,10%);
@@ -42,18 +44,10 @@ letter-spacing: -3;
   display: inline-block;
   padding: 3px 15px 3px 6px;
 
-	/*&:hover:before{*/
-		/*content: "> ";*/
-	/*}*/
-
 	&:hover {
-    background-color: white;
+    background-color: $dark-white;
   }
-  -webkit-transition: background-color 300ms linear;
-     -moz-transition: background-color 300ms linear;
-       -o-transition: background-color 300ms linear;
-      -ms-transition: background-color 300ms linear;
-          transition: background-color 300ms linear;
+  @include transition(background-color 100ms ease-in-out);
 
 	font-size: 30pt;
 	font-weight: bold;
@@ -73,15 +67,11 @@ letter-spacing: -3;
   font-family:$font-cursive;
   font-size:140%;  
 
-  -moz-box-shadow:5px 5px 20px rgba(33,33,33,1);  
-  -webkit-box-shadow: 5px 5px 20px rgba(33,33,33,.7);  
   box-shadow: 5px 5px 20px rgba(33,33,33,.7);  
 
   &.editing {
-    background:$light-yellow;
-    -moz-box-shadow:    15px 15px 45px rgba(33, 33, 33, 0.7);
-    -webkit-box-shadow: 15px 15px 45px rgba(33, 33, 33, 0.7);
-    box-shadow:         15px 15px 45px rgba(33, 33, 33, 0.7);
+    background: $light-yellow;
+    box-shadow: 15px 15px 45px rgba(33, 33, 33, 0.7);
   }
 
   p {
@@ -102,23 +92,17 @@ letter-spacing: -3;
   margin: $card-margin;
 	padding: $card-padding;
 
-					transform: rotate(-3deg);
-	-webkit-transform: rotate(-3deg);
-			 -o-transform: rotate(-3deg);
+  @include transform(rotate(-3deg));
   &:hover {
-					transform: rotate(0);
-	-webkit-transform: rotate(0);
-			 -o-transform: rotate(0);
+    @include transform(rotate(0));
   }
-  -webkit-transition: -webkit-transform 100ms ease-in;
-     -moz-transition:    -moz-transform 100ms ease-in;
-       -o-transition:      -o-transform 100ms ease-in;
-          transition:         transform 100ms ease-in;
+  // can't use transition() shorthand when transition property is vendor-prefixed.
+  @include transition-property(transform);
+  @include transition-duration(100ms);
+  @include transition-timing-function(ease-in-out);
 
 	background: lighten($yellow,5%);
-					box-shadow: 14px 14px 60px rgba(33,33,33,0.8);  
-  -webkit-box-shadow: 14px 14px 60px rgba(33,33,33,0.8);  
-	   -moz-box-shadow: 14px 14px 60px rgba(33,33,33,0.8);  
+  box-shadow: 14px 14px 60px rgba(33,33,33,0.8);  
 	
 	textarea {
 		font-family:$font-cursive;

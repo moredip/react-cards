@@ -36,7 +36,9 @@ gulp.task('build-js', function () {
 
 gulp.task('sass', function () {
     gulp.src('scss/*.scss')
-        .pipe(sass())
+        .pipe(sass({
+          includePaths: require('node-bourbon').includePaths
+        }))
         .pipe(gulp.dest(BUILD_DIR));
 });
 
