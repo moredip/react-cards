@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
     react = require('gulp-react'),
     concat = require('gulp-concat'),
-    del = require('del');
+    del = require('del'),
+    merge = require('merge-stream');
 
 
 var BUILD_DIR = 'build';
@@ -23,10 +24,18 @@ gulp.task('copy', function () {
 });
 
 gulp.task('build-js', function () {
-  gulp.src('js/**/*.js')
+  var js = gulp.src(['js/init.js','js/**/*.js']);
+  var jsx = gulp.src('js/**/*.jsx')
+    .pipe(react());
+
+  merge(js,jsx)
     .pipe(concat('app.js'))
     .pipe(gulp.dest(BUILD_DIR));
-  
+});
+
+gulp.task('watch', ['default'], function(){
+  //gulp.watch(['js'], ['build-js']);
+  gulp.watch(['index.html'], ['copy']);
 });
 
 gulp.task('default', ['copy','build-js']);
