@@ -15,7 +15,6 @@ Cards.CardsView = React.createClass({
     });
     return (
       <section>
-        <div class="title">My Card Wall</div>
         {cards}
       </section>
     );

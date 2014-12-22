@@ -2,11 +2,10 @@ var gulp = require('gulp'),
     react = require('gulp-react'),
     concat = require('gulp-concat'),
     del = require('del'),
-    streamqueue = require('streamqueue');
-
+    streamqueue = require('streamqueue'),
+    sass = require('gulp-sass');
 
 var BUILD_DIR = 'build';
-
 
 gulp.task('clean', function(cb){
   del([BUILD_DIR],cb);
@@ -35,9 +34,16 @@ gulp.task('build-js', function () {
       .pipe(gulp.dest(BUILD_DIR));
 });
 
-gulp.task('watch', ['default'], function(){
-  //gulp.watch(['js'], ['build-js']);
-  gulp.watch(['index.html'], ['copy']);
+gulp.task('sass', function () {
+    gulp.src('scss/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest(BUILD_DIR));
 });
 
-gulp.task('default', ['copy','build-js']);
+// borked on node 0.10.20
+//gulp.task('watch', ['default'], function(){
+  //gulp.watch(['js'], ['build-js']);
+  //gulp.watch(['index.html'], ['copy']);
+//});
+
+gulp.task('default', ['copy','build-js','sass']);
