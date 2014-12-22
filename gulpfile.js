@@ -2,7 +2,7 @@ var gulp = require('gulp'),
     react = require('gulp-react'),
     concat = require('gulp-concat'),
     del = require('del'),
-    merge = require('merge-stream');
+    streamqueue = require('streamqueue');
 
 
 var BUILD_DIR = 'build';
@@ -16,6 +16,8 @@ gulp.task('copy', function () {
   var inputs = [
     'node_modules/react/dist/react.min.js',
     'node_modules/react/dist/react.js',
+    'node_modules/underscore/underscore-min.js',
+    'node_modules/underscore/underscore.js',
     'index.html'
   ];
 
@@ -28,9 +30,9 @@ gulp.task('build-js', function () {
   var jsx = gulp.src('js/**/*.jsx')
     .pipe(react());
 
-  merge(js,jsx)
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest(BUILD_DIR));
+    streamqueue( {objectMode:true}, js, jsx )
+      .pipe(concat('app.js'))
+      .pipe(gulp.dest(BUILD_DIR));
 });
 
 gulp.task('watch', ['default'], function(){
