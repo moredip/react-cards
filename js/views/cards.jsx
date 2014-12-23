@@ -13,7 +13,7 @@ Cards.CardView = React.createClass({
 Cards.CardsView = React.createClass({
   render: function(){
     var cards = _.map( this.props.cards, function (card,ix) {
-      return <Cards.CardView text={card} key={ix} />;
+      return <Cards.CardView text={card.text} key={ix} />;
     });
     return (
       <section>

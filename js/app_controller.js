@@ -1,21 +1,18 @@
-
 Cards.createAppController = function(appContainer){
-  var cardsCollection = new Cards.CardsCollection();
-  var wallTitle = "Your Card Wall";
+  var cardWall = new Cards.CardWall();
 
   var onCreateCard = function(params){
-    cardsCollection.push( _.pick(params,'text') );
+    cardWall.addCard(params);
   }
 
   var onEditTitle = function(newTitle){
-    wallTitle = newTitle;
-    renderApp();
+    cardWall.set('wallTitle', newTitle);
   }
 
   var buildAppProps = function(){
     return { 
-      cards: cardsCollection.toJSON(),
-      wallTitle: wallTitle,
+      cards: cardWall.cardsAsJSON(),
+      wallTitle: cardWall.get('wallTitle'),
       onCreateCard: onCreateCard,
       onEditTitle: onEditTitle
     };
@@ -23,18 +20,13 @@ Cards.createAppController = function(appContainer){
 
   var renderApp = function(){
     React.render( 
-      React.createElement( Cards.CardWallView, buildAppProps(cardsCollection) ), 
+      React.createElement( Cards.CardWallView, buildAppProps() ), 
       appContainer 
     );
   }
 
-  cardsCollection.push({ text: "this card" });
-  cardsCollection.push({ text: "another card" });
-  cardsCollection.on('all', renderApp);
+  cardWall.addCard({ text: "this card" });
+  cardWall.on('change', renderApp);
 
   renderApp();
-
-  //cardStore.onChange = function(cardStore) {
-    //cardWallView.setState( {cards: cardStore.getCards()} );
-  //}
 }
