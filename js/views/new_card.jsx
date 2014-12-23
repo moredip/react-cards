@@ -14,7 +14,9 @@ Cards.NewCardView = React.createClass({
 
   _onClick: function(e){
     e.preventDefault();
-    var content = this.refs.content.getDOMNode().value.trim();
+    var contentEl = this.refs.content.getDOMNode();
+    var content = contentEl.value.trim();
+    contentEl.value = "";
 
     this.props.onCreateCard({text: content});
   }
