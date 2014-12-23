@@ -4,7 +4,7 @@ Cards.CardWallView = React.createClass({
       <section id="card-wall">
         <div className="title">My Card Wall</div>
         <Cards.CardsView cards={this.props.cards} />
-        <Cards.NewCardView />
+        <Cards.NewCardView onCreateCard={this.props.onCreateCard} />
       </section>
     );
   }

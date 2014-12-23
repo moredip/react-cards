@@ -13,10 +13,10 @@ gulp.task('clean', function(cb){
 
 gulp.task('copy', function () {
   var inputs = [
-    'node_modules/react/dist/react.min.js',
-    'node_modules/react/dist/react.js',
+    'node_modules/react/dist/react.*',
     'node_modules/underscore/underscore-min.js',
     'node_modules/underscore/underscore.js',
+    'node_modules/backbone/backbone-min.*',
     'index.html'
   ];
 

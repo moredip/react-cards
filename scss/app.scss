@@ -93,15 +93,16 @@ letter-spacing: -3;
 	padding: $card-padding;
 
   @include transform(rotate(-3deg));
+  background: $yellow;
   &:hover {
     @include transform(rotate(0));
+    background: lighten($yellow,5%);
   }
   // can't use transition() shorthand when transition property is vendor-prefixed.
   @include transition-property(transform);
   @include transition-duration(100ms);
   @include transition-timing-function(ease-in-out);
 
-	background: lighten($yellow,5%);
   box-shadow: 14px 14px 60px rgba(33,33,33,0.8);  
 	
 	textarea {

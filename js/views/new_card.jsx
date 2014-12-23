@@ -1,4 +1,8 @@
 Cards.NewCardView = React.createClass({
+  propType: {
+    onCreateCard: React.PropTypes.func.isRequired
+  },
+
   render: function(){
     return (
       <section id="new-card">
@@ -12,6 +16,6 @@ Cards.NewCardView = React.createClass({
     e.preventDefault();
     var content = this.refs.content.getDOMNode().value.trim();
 
-    console.log("let's create a new card!", content);
+    this.props.onCreateCard({text: content});
   }
 });
