@@ -83,6 +83,14 @@ letter-spacing: -3;
   }
 }  
 
+.cards-enter {
+  opacity: 0.01;
+  @include transition(opacity 100ms ease-in);
+  &.cards-enter-active {
+    opacity: 1;
+  }
+}
+
 #new-card {
 	position: relative;
   width:$card-width*1.1;

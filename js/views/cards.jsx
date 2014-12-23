@@ -1,3 +1,5 @@
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 Cards.CardView = React.createClass({
   render: function(){
     return (
@@ -15,7 +17,9 @@ Cards.CardsView = React.createClass({
     });
     return (
       <section>
-        {cards}
+        <ReactCSSTransitionGroup transitionName="cards">
+          {cards}
+        </ReactCSSTransitionGroup>
       </section>
     );
   }
