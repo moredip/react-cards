@@ -1,15 +1,23 @@
 
 Cards.createAppController = function(appContainer){
   var cardsCollection = new Cards.CardsCollection();
+  var wallTitle = "Your Card Wall";
 
   var onCreateCard = function(params){
     cardsCollection.push( _.pick(params,'text') );
   }
 
+  var onEditTitle = function(newTitle){
+    wallTitle = newTitle;
+    renderApp();
+  }
+
   var buildAppProps = function(){
     return { 
       cards: cardsCollection.toJSON(),
-      onCreateCard: onCreateCard
+      wallTitle: wallTitle,
+      onCreateCard: onCreateCard,
+      onEditTitle: onEditTitle
     };
   }
 
