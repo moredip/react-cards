@@ -35,9 +35,6 @@ button {
   @include user-select(none);
 }
 
-
-
-
 #fork-me {
   position: absolute;
   right: 0;
@@ -115,14 +112,19 @@ letter-spacing: -3;
 }
 
 .card {
-  text-decoration:none;  
-  color:#000;  
-  background:$yellow;
   display:inline-block;  
+	position: relative;
+  vertical-align: top;
+
+  background:$yellow;
   width:$card-width;
 	height:$card-height;
+
   padding: $card-padding;
   margin: $card-margin;
+
+  text-decoration:none;  
+  color:#000;  
 
   font-family:$font-cursive;
   font-size:140%;  
@@ -131,18 +133,56 @@ letter-spacing: -3;
 
   &.editing {
     background: $light-yellow;
+    box-shadow: 14px 14px 60px rgba(33,33,33,0.8);  
+  }
+
+  &:hover {
     box-shadow: 15px 15px 45px rgba(33, 33, 33, 0.7);
   }
+  @include transition(all 100ms ease-in-out);
+
 
   p {
     margin: 0;
   }
 
-  .curr-vote {
-    text-align: right;
+  button {
+    @extend .fa;
+    font-size: 26pt;
+
+		position: absolute;
+    bottom: 0.2em;
+
+    &.edit {
+      @extend .fa-edit;
+      right: 1.2em;
+    }
+    &.delete {
+      @extend .fa-trash-o;
+      right: 0.2em;
+    }
+
+    color: $dark-gray;
+    &:hover {
+      color: black;
+    }
+  }
+
+  button {
+    visibility: hidden;
+    opacity: 0;
+    @include transition(opacity 300ms ease-out);
+  }
+  &:hover button {
+    visibility: visible;
+    opacity: 1;
   }
 }  
 
+.cards-leave {
+  opacity: 0.01;
+  @include transition(opacity 100ms ease-in);
+}
 .cards-enter {
   opacity: 0.01;
   @include transition(opacity 100ms ease-in);

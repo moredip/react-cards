@@ -3,6 +3,7 @@ var cx = React.addons.classSet;
 Cards.CardWallView = React.createClass({
   propType: {
     onCreateCard: React.PropTypes.func.isRequired,
+    onDeleteCard: React.PropTypes.func.isRequired,
     onEditTitle: React.PropTypes.func.isRequired
   },
 
@@ -29,7 +30,7 @@ Cards.CardWallView = React.createClass({
         <div className={titleClasses}>
           {title}
         </div>
-        <Cards.CardsView cards={this.props.cards} />
+        <Cards.CardsView cards={this.props.cards} onDeleteCard={this.props.onDeleteCard} />
         <Cards.NewCardView onCreateCard={this.props.onCreateCard} />
       </section>
     );

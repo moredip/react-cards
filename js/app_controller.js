@@ -5,15 +5,20 @@ Cards.createAppController = function(appContainer){
     cardWall.addCard(params);
   }
 
+  var onDeleteCard = function(card){
+    cardWall.deleteCard(card);
+  }
+
   var onEditTitle = function(newTitle){
     cardWall.set('wallTitle', newTitle);
   }
 
   var buildAppProps = function(){
     return { 
-      cards: cardWall.cardsAsJSON(),
+      cards: cardWall.get('cards'),
       wallTitle: cardWall.get('wallTitle'),
       onCreateCard: onCreateCard,
+      onDeleteCard: onDeleteCard,
       onEditTitle: onEditTitle
     };
   }

@@ -10,7 +10,8 @@ Cards.CardWall = Backbone.Model.extend({
     var newCards = this.get('cards').concat( newCard );
     this.set( 'cards', newCards );
   },
-  cardsAsJSON: function(){
-    return _.map( this.get('cards'), function(c){ return c.toJSON(); } );
+  deleteCard: function(cardToDelete){
+    var newCards = _.without( this.get('cards'), cardToDelete );
+    this.set( 'cards', newCards );
   }
 });
