@@ -11,7 +11,7 @@ Cards.NewCardView = React.createClass({
     return (
       <section id="new-card">
         <textarea placeholder="Make a new card here" ref="content" onKeyPress={this._onKeyPress}></textarea>
-        <button className="add" onClick={this._onClick}>+</button>
+        <button className="add" onClick={this._onClick}></button>
       </section>
     );
   },

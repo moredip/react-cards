@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     streamqueue = require('streamqueue'),
     sass = require('gulp-sass');
 
-var BUILD_DIR = 'build';
+var BUILD_DIR = 'build',
+    FONT_AWESOME_INCLUDE_PATH = 'node_modules/font-awesome/scss';
 
 gulp.task('clean', function(cb){
   del([BUILD_DIR],cb);
@@ -22,6 +23,9 @@ gulp.task('copy', function () {
 
   gulp.src(inputs)
     .pipe(gulp.dest(BUILD_DIR));
+
+  gulp.src(['node_modules/font-awesome/fonts/**/*'], {base: "node_modules/font-awesome"})
+    .pipe(gulp.dest(BUILD_DIR));
 });
 
 gulp.task('build-js', function () {
@@ -37,7 +41,7 @@ gulp.task('build-js', function () {
 gulp.task('sass', function () {
     gulp.src('scss/*.scss')
         .pipe(sass({
-          includePaths: require('node-bourbon').includePaths
+          includePaths: require('node-bourbon').includePaths.concat( FONT_AWESOME_INCLUDE_PATH )
         }))
         .pipe(gulp.dest(BUILD_DIR));
 });

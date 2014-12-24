@@ -16,8 +16,8 @@ Cards.EditingWallTitleView = React.createClass({
     return (
       <div>
         <input type="text" value={this.state.title} onChange={this._onChange} onKeyPress={this._onKeyPress} />
-        <button className="confirm" onClick={this._onConfirmClicked}>&#x2713;</button>
-        <button className="cancel" onClick={this._onCancelClicked}>&#x2717;</button>
+        <button className="confirm" onClick={this._onConfirmClicked}></button>
+        <button className="cancel" onClick={this._onCancelClicked}></button>
       </div>
     );
   },

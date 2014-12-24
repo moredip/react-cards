@@ -1,5 +1,8 @@
 @import "bourbon";
 
+$fa-font-path: "fonts";
+@import "font-awesome";
+
 /**************************
          VARIABLES  
 **************************/
@@ -28,6 +31,7 @@ button {
   line-height: 50px;
   cursor: pointer;
   background: none;
+  outline: none;
   @include user-select(none);
 }
 
@@ -68,11 +72,12 @@ letter-spacing: -3;
 	font-weight: bold;
 	color: $dark-gray;
 
-  &.editing {
-    background-color: $dark-white;
-  }
 	&:hover {
     background-color: $dark-white;
+  }
+  &.editing {
+    background-color: white;
+    box-shadow: 5px 5px 20px rgba(33,33,33,.7);  
   }
   @include transition(background-color 100ms ease-in-out);
 
@@ -92,15 +97,19 @@ letter-spacing: -3;
     outline: none;
   }
   button {
-    font-size: 30pt;
-    &:last-of-type{ 
-      margin-right: 4px;
-    }
+    @extend .fa;
+    
     &.confirm {
+      @extend .fa-check;
       color: $confirm-green;
     }
     &.cancel {
+      @extend .fa-times;
       color: $cancel-red;
+    }
+
+    &:last-of-type{ 
+      margin-right: 4px;
     }
   }
 }
@@ -176,7 +185,9 @@ letter-spacing: -3;
 	}
 
 	button {
-	  font-size: 35pt;
+    @extend .fa;
+    @extend .fa-plus-square-o;
+	  font-size: 26pt;
 		position: absolute;
 		right: 8px;
 		bottom: 8px;
