@@ -4,7 +4,7 @@ Cards.WallTitleView = React.createClass({
   },
   render: function(){
     return (
-      <div className="title" onClick={this._onClick}>{this.props.title}</div>
+      <span className="title-text" onClick={this._onClick}>{this.props.title}</span>
     );
   },
   _onClick: function(e){

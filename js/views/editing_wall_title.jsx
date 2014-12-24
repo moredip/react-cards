@@ -1,3 +1,7 @@
+var isKeyPressEventToConfirm = function(e){
+  return e.charCode === 13;
+};
+
 Cards.EditingWallTitleView = React.createClass({
   propType: {
     onEditConfirmed: React.PropTypes.func.isRequired,
@@ -11,19 +15,27 @@ Cards.EditingWallTitleView = React.createClass({
   render: function(){
     return (
       <div>
-        <input type="text" className="editing-title" value={this.state.title} onChange={this._onChange} />
-        <button onClick={this._onConfirmClicked}>Y</button>
-        <button onClick={this._onCancelClicked}>N</button>
+        <input type="text" value={this.state.title} onChange={this._onChange} onKeyPress={this._onKeyPress} />
+        <button className="confirm" onClick={this._onConfirmClicked}>&#x2713;</button>
+        <button className="cancel" onClick={this._onCancelClicked}>&#x2717;</button>
       </div>
     );
   },
   _onChange: function(e){
     this.setState({title: e.target.value});
   },
+  _onKeyPress: function(e){
+    if( isKeyPressEventToConfirm(e) ){
+      this._confirmEdit();
+    }
+  },
   _onConfirmClicked: function(){
-    this.props.onEditConfirmed(this.state.title);
+    this._confirmEdit();
   },
   _onCancelClicked: function(){
     this.props.onEditCanceled();
+  },
+  _confirmEdit: function(){
+    this.props.onEditConfirmed(this.state.title);
   }
 })

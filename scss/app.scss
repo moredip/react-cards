@@ -1,10 +1,16 @@
 @import "bourbon";
 
+/**************************
+         VARIABLES  
+**************************/
+
 $background-color: #eee;
 $dark-gray: lighten(black,30%);
 $dark-white: darken(white,10%);
 $yellow: transparentize(#ffc,0.1);
 $light-yellow: lighten($yellow, 5%);
+$confirm-green: darken(green,10%);
+$cancel-red: darken(red,10%);
 
 $font-cursive:"Shadows Into Light Two",arial,sans-serif;  
 
@@ -12,6 +18,21 @@ $card-margin: 20px;
 $card-padding: 16px;
 $card-width: 200px;
 $card-height: 124px;
+
+
+/**************************
+         NORMALIZE  
+**************************/
+button {
+  border: none;
+  line-height: 50px;
+  cursor: pointer;
+  background: none;
+  @include user-select(none);
+}
+
+
+
 
 #fork-me {
   position: absolute;
@@ -42,16 +63,46 @@ letter-spacing: -3;
 	margin-top: $card-margin;
 	margin-left: $card-margin;
   display: inline-block;
-  padding: 3px 15px 3px 6px;
 
+	font-size: 30pt;
+	font-weight: bold;
+	color: $dark-gray;
+
+  &.editing {
+    background-color: $dark-white;
+  }
 	&:hover {
     background-color: $dark-white;
   }
   @include transition(background-color 100ms ease-in-out);
 
-	font-size: 30pt;
-	font-weight: bold;
-	color: $dark-gray;
+  .title-text {
+    padding: 3px 15px 3px 6px;
+  }
+
+  input {
+    margin: 0;
+    padding: 0 0 0 6px;
+    display: inline-block;
+    font: inherit;
+    font-style: italic;
+    color: inherit;
+    border: none;
+    background: none;
+    outline: none;
+  }
+  button {
+    font-size: 30pt;
+    &:last-of-type{ 
+      margin-right: 4px;
+    }
+    &.confirm {
+      color: $confirm-green;
+    }
+    &.cancel {
+      color: $cancel-red;
+    }
+  }
 }
 
 .card {
@@ -126,9 +177,6 @@ letter-spacing: -3;
 
 	button {
 	  font-size: 35pt;
-		border: none;
-		cursor: pointer;
-		background: none;
 		position: absolute;
 		right: 8px;
 		bottom: 8px;

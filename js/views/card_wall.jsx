@@ -1,3 +1,5 @@
+var cx = React.addons.classSet;
+
 Cards.CardWallView = React.createClass({
   propType: {
     onCreateCard: React.PropTypes.func.isRequired,
@@ -20,10 +22,13 @@ Cards.CardWallView = React.createClass({
     }else{
       title = <Cards.WallTitleView title={this.props.wallTitle} onClick={this._onTitleClicked} />;
     }
+    var titleClasses = cx({title:true,editing:this.state.editingTitle});
 
     return (
       <section id="card-wall">
-        {title}
+        <div className={titleClasses}>
+          {title}
+        </div>
         <Cards.CardsView cards={this.props.cards} />
         <Cards.NewCardView onCreateCard={this.props.onCreateCard} />
       </section>
