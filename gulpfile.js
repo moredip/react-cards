@@ -46,10 +46,10 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(BUILD_DIR));
 });
 
-// borked on node 0.10.20
-//gulp.task('watch', ['default'], function(){
-  //gulp.watch(['js'], ['build-js']);
-  //gulp.watch(['index.html'], ['copy']);
-//});
+gulp.task('watch', ['default'], function(){
+  gulp.watch(['js/**/*'], ['build-js']);
+  gulp.watch(['scss/*.scss'], ['sass']);
+  gulp.watch(['index.html'], ['copy']);
+});
 
 gulp.task('default', ['copy','build-js','sass']);
