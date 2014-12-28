@@ -3,22 +3,24 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r backbone js/init.js js/domain tests/unit"
   },
   "author": "phodgson@thoughtworks.com",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "~3.8.10",
-    "gulp-react": "~2.0.0",
-    "react": "~0.12.2",
-    "gulp-concat": "~2.4.2",
-    "del": "~1.1.0",
-    "underscore": "~1.7.0",
-    "streamqueue": "~0.1.1",
-    "node-sass": "~1.2.3",
-    "gulp-sass": "~1.2.4",
-    "node-bourbon": "~1.2.3",
     "backbone": "~1.1.2",
-    "font-awesome": "~4.2.0"
+    "chai": "^1.10.0",
+    "del": "~1.1.0",
+    "font-awesome": "~4.2.0",
+    "gulp": "~3.8.10",
+    "gulp-concat": "~2.4.2",
+    "gulp-react": "~2.0.0",
+    "gulp-sass": "~1.2.4",
+    "mocha": "^2.1.0",
+    "node-bourbon": "~1.2.3",
+    "node-sass": "~1.2.3",
+    "react": "~0.12.2",
+    "streamqueue": "~0.1.1",
+    "underscore": "~1.7.0"
   }
 }

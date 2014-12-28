@@ -1,1 +1,2 @@
-window.Cards = {}
+global = global || window;
+global.Cards = {}
