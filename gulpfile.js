@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
-    watchify = require('watchify');
+    mocha = require('gulp-mocha');
 
 var BUILD_DIR = 'build',
     FONT_AWESOME_INCLUDE_PATH = 'node_modules/font-awesome/scss';
@@ -43,6 +43,13 @@ gulp.task('browserify', function() {
   bundler.bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest(BUILD_DIR));
+});
+
+gulp.task('test', function() {
+  gulp.src(['tests/setup.js','tests/unit/**/*.js'],{read:false})
+    .pipe(mocha({
+      ui: 'bdd'
+    }));
 });
 
 gulp.task('sass', function () {
