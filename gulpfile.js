@@ -34,26 +34,15 @@ gulp.task('copy', function () {
 
 gulp.task('browserify', function() {
   var bundler = browserify({
-      entries: ['./js/boot.js'],
+      entries: ['./js/app.js'],
       extensions: ['.jsx'],
       debug: true
     });
   bundler.transform('reactify');
 
   bundler.bundle()
-    .pipe(source('boot.js'))
+    .pipe(source('app.js'))
     .pipe(gulp.dest(BUILD_DIR));
-});
-
-
-gulp.task('build-js', function () {
-  var js = gulp.src(['js/init.js','js/**/*.js']);
-  var jsx = gulp.src('js/**/*.jsx')
-    .pipe(react());
-
-    streamqueue( {objectMode:true}, js, jsx )
-      .pipe(concat('app.js'))
-      .pipe(gulp.dest(BUILD_DIR));
 });
 
 gulp.task('sass', function () {
@@ -65,9 +54,9 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', ['default'], function(){
-  gulp.watch(['js/**/*'], ['build-js']);
+  gulp.watch(['js/**/*'], ['browserify']);
   gulp.watch(['scss/*.scss'], ['sass']);
   gulp.watch(['index.html'], ['copy']);
 });
 
-gulp.task('default', ['copy','build-js','sass']);
+gulp.task('default', ['copy','browserify','sass']);
