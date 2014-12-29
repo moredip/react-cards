@@ -1,8 +1,10 @@
+var React = require('react/addons');
+
 var isKeyPressEventToCreateCard = function(e){
   return e.charCode === 13 && (!e.shiftKey);
 };
 
-Cards.NewCardView = React.createClass({
+module.exports = React.createClass({
   propType: {
     onCreateCard: React.PropTypes.func.isRequired
   },

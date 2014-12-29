@@ -3,7 +3,10 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     del = require('del'),
     streamqueue = require('streamqueue'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    watchify = require('watchify');
 
 var BUILD_DIR = 'build',
     FONT_AWESOME_INCLUDE_PATH = 'node_modules/font-awesome/scss';
@@ -27,6 +30,21 @@ gulp.task('copy', function () {
   gulp.src(['node_modules/font-awesome/fonts/**/*'], {base: "node_modules/font-awesome"})
     .pipe(gulp.dest(BUILD_DIR));
 });
+
+
+gulp.task('browserify', function() {
+  var bundler = browserify({
+      entries: ['./js/boot.js'],
+      extensions: ['.jsx'],
+      debug: true
+    });
+  bundler.transform('reactify');
+
+  bundler.bundle()
+    .pipe(source('boot.js'))
+    .pipe(gulp.dest(BUILD_DIR));
+});
+
 
 gulp.task('build-js', function () {
   var js = gulp.src(['js/init.js','js/**/*.js']);

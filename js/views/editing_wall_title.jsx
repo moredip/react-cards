@@ -1,8 +1,10 @@
+var React = require('react/addons');
+
 var isKeyPressEventToConfirm = function(e){
   return e.charCode === 13;
 };
 
-Cards.EditingWallTitleView = React.createClass({
+module.exports = React.createClass({
   propType: {
     onEditConfirmed: React.PropTypes.func.isRequired,
     onEditCanceled: React.PropTypes.func.isRequired

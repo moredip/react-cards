@@ -1,4 +1,8 @@
-Cards.CardWall = Backbone.Model.extend({
+var Backbone = require('backbone'),
+    _ = require('underscore'),
+    Card = require('./card');
+
+module.exports = Backbone.Model.extend({
   defaults: function(){
     return {
       wallTitle: "The Wall",
@@ -6,7 +10,7 @@ Cards.CardWall = Backbone.Model.extend({
     };
   },
   addCard: function(cardParams){
-    var newCard = new Cards.Card( _.pick(cardParams,'text') );
+    var newCard = new Card( _.pick(cardParams,'text') );
     var newCards = this.get('cards').concat( newCard );
     this.set( 'cards', newCards );
   },
