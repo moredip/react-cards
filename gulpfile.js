@@ -12,6 +12,11 @@ var gulp = require('gulp'),
 var BUILD_DIR = 'build',
     FONT_AWESOME_INCLUDE_PATH = 'node_modules/font-awesome/scss';
 
+function handleError(err) {
+  console.log(err.toString());
+  this.emit('end');
+}
+
 gulp.task('clean', function(cb){
   del([BUILD_DIR],cb);
 });
@@ -49,8 +54,10 @@ gulp.task('browserify', function() {
 gulp.task('test', function() {
   gulp.src(['tests/setup.js','tests/unit/**/*.js'],{read:false})
     .pipe(mocha({
-      ui: 'bdd'
-    }));
+      ui: 'bdd',
+      useColors: false,
+    }))
+    .on("error", handleError);
 });
 
 gulp.task('sass', function () {
@@ -75,4 +82,4 @@ gulp.task('watch', ['default'], function(){
   });
 });
 
-gulp.task('default', ['copy','browserify','sass']);
+gulp.task('default', ['test','copy','browserify','sass']);
