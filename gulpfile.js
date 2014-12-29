@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    _ = require('underscore'),
     react = require('gulp-react'),
     concat = require('gulp-concat'),
     del = require('del'),
@@ -61,9 +62,17 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', ['default'], function(){
-  gulp.watch(['js/**/*'], ['browserify']);
-  gulp.watch(['scss/*.scss'], ['sass']);
-  gulp.watch(['index.html'], ['copy']);
+  var watchOpts = {debounceDelay:2000}, // workaround for editors saving file twice: http://stackoverflow.com/questions/21608480/gulp-js-watch-task-runs-twice-when-saving-files
+      watchTargets = {
+    './js/**/*': ['test','browserify'],
+    './tests/**/*': ['test'],
+    './scss/*.scss': ['sass'],
+    './index.html': ['copy']
+  };
+  
+  _.each(watchTargets, function(tasks,glob){
+    gulp.watch( glob, watchOpts, tasks );
+  });
 });
 
 gulp.task('default', ['copy','browserify','sass']);
