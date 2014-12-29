@@ -1,6 +1,8 @@
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var React = require('react/addons'),
+    _ = require('underscore'),
+    ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-Cards.CardView = React.createClass({
+var CardView = React.createClass({
   propType: {
     onDeleteCard: React.PropTypes.func.isRequired
   },
@@ -19,14 +21,14 @@ Cards.CardView = React.createClass({
   }
 })
 
-Cards.CardsView = React.createClass({
+module.exports = React.createClass({
   propType: {
     onDeleteCard: React.PropTypes.func.isRequired
   },
   render: function(){
     var myProps = this.props;
     var cards = _.map( myProps.cards, function (card) {
-      return <Cards.CardView card={card} key={card.cid} onDeleteCard={myProps.onDeleteCard} />;
+      return <CardView card={card} key={card.cid} onDeleteCard={myProps.onDeleteCard} />;
     });
     return (
       <section>

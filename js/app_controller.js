@@ -1,5 +1,9 @@
-Cards.createAppController = function(appContainer){
-  var cardWall = new Cards.CardWall();
+var CardWall = require('./domain/card_wall'),
+    CardWallView = require('./views/card_wall'),
+    React = require('react');
+
+module.exports = function(appContainer){
+  var cardWall = new CardWall();
 
   var onCreateCard = function(params){
     cardWall.addCard(params);
@@ -25,7 +29,7 @@ Cards.createAppController = function(appContainer){
 
   var renderApp = function(){
     React.render( 
-      React.createElement( Cards.CardWallView, buildAppProps() ), 
+      React.createElement( CardWallView, buildAppProps() ), 
       appContainer 
     );
   }

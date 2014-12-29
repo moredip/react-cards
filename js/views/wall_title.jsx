@@ -1,4 +1,6 @@
-Cards.WallTitleView = React.createClass({
+var React = require('react/addons');
+
+module.exports = React.createClass({
   propType: {
     onClick: React.PropTypes.func.isRequired
   },

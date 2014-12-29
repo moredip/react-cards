@@ -10,6 +10,7 @@
   "devDependencies": {
     "backbone": "~1.1.2",
     "chai": "^1.10.0",
+    "browserify": "^8.0.2",
     "del": "~1.1.0",
     "font-awesome": "~4.2.0",
     "gulp": "~3.8.10",
@@ -20,7 +21,10 @@
     "node-bourbon": "~1.2.3",
     "node-sass": "~1.2.3",
     "react": "~0.12.2",
+    "reactify": "^0.17.1",
     "streamqueue": "~0.1.1",
-    "underscore": "~1.7.0"
+    "underscore": "~1.7.0",
+    "vinyl-source-stream": "^1.0.0",
+    "watchify": "^2.2.1"
   }
 }

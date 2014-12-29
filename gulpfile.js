@@ -3,7 +3,10 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     del = require('del'),
     streamqueue = require('streamqueue'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    watchify = require('watchify');
 
 var BUILD_DIR = 'build',
     FONT_AWESOME_INCLUDE_PATH = 'node_modules/font-awesome/scss';
@@ -28,14 +31,18 @@ gulp.task('copy', function () {
     .pipe(gulp.dest(BUILD_DIR));
 });
 
-gulp.task('build-js', function () {
-  var js = gulp.src(['js/init.js','js/**/*.js']);
-  var jsx = gulp.src('js/**/*.jsx')
-    .pipe(react());
 
-    streamqueue( {objectMode:true}, js, jsx )
-      .pipe(concat('app.js'))
-      .pipe(gulp.dest(BUILD_DIR));
+gulp.task('browserify', function() {
+  var bundler = browserify({
+      entries: ['./js/app.js'],
+      extensions: ['.jsx'],
+      debug: true
+    });
+  bundler.transform('reactify');
+
+  bundler.bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest(BUILD_DIR));
 });
 
 gulp.task('sass', function () {
@@ -47,9 +54,9 @@ gulp.task('sass', function () {
 });
 
 gulp.task('watch', ['default'], function(){
-  gulp.watch(['js/**/*'], ['build-js']);
+  gulp.watch(['js/**/*'], ['browserify']);
   gulp.watch(['scss/*.scss'], ['sass']);
   gulp.watch(['index.html'], ['copy']);
 });
 
-gulp.task('default', ['copy','build-js','sass']);
+gulp.task('default', ['copy','browserify','sass']);

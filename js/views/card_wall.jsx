@@ -1,6 +1,12 @@
+var React = require('react/addons'),
+    WallTitleView = require('./wall_title'),
+    EditingWallTitleView = require('./editing_wall_title'),
+    CardsView = require('./cards'),
+    NewCardView = require('./new_card');
+
 var cx = React.addons.classSet;
 
-Cards.CardWallView = React.createClass({
+module.exports = React.createClass({
   propType: {
     onCreateCard: React.PropTypes.func.isRequired,
     onDeleteCard: React.PropTypes.func.isRequired,
@@ -16,12 +22,12 @@ Cards.CardWallView = React.createClass({
   render: function(){
     var title;
     if( this.state.editingTitle ){
-      title = <Cards.EditingWallTitleView 
+      title = <EditingWallTitleView 
         initialTitle={this.props.wallTitle} 
         onEditConfirmed={this._onTitleEditConfirmed}
         onEditCanceled={this._onTitleEditCanceled} />
     }else{
-      title = <Cards.WallTitleView title={this.props.wallTitle} onClick={this._onTitleClicked} />;
+      title = <WallTitleView title={this.props.wallTitle} onClick={this._onTitleClicked} />;
     }
     var titleClasses = cx({title:true,editing:this.state.editingTitle});
 
@@ -30,8 +36,8 @@ Cards.CardWallView = React.createClass({
         <div className={titleClasses}>
           {title}
         </div>
-        <Cards.CardsView cards={this.props.cards} onDeleteCard={this.props.onDeleteCard} />
-        <Cards.NewCardView onCreateCard={this.props.onCreateCard} />
+        <CardsView cards={this.props.cards} onDeleteCard={this.props.onDeleteCard} />
+        <NewCardView onCreateCard={this.props.onCreateCard} />
       </section>
     );
   },
