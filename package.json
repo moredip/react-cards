@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "mocha -r backbone js/init.js js/domain tests/unit"
+    "test": "mocha tests/setup.js tests/unit"
   },
   "author": "phodgson@thoughtworks.com",
   "license": "MIT",

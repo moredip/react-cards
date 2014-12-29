@@ -1,5 +1,7 @@
-describe(Cards.Card, function(){
+var Card = require('../../js/domain/card');
+
+describe('Card', function(){
   it('is defined', function(){
-    expect(Cards.Card).to.be.defined();
+    expect(Card).to.be.exist();
   });
 });
