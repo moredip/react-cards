@@ -1,4 +1,4 @@
-var Card = require('../../js/domain/card');
+var Card = appRequire('domain/card');
 
 describe('Card', function(){
   it('is defined', function(){

@@ -1,6 +1,9 @@
 var mocha = require('mocha'),
     chai = require('chai');
 
-(global || window).expect = chai.expect;
-
-//mocha.setup('bdd');
+(function(global){
+  global.expect = chai.expect;
+  global.appRequire = function(path){
+    return require('../js/'+path);
+  };
+})(global||window);

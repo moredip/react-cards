@@ -1,0 +1,21 @@
+{
+  "launch_in_dev":["phantomjs"],
+  "launch_in_ci":["phantomjs"],
+  "phantomjs_debug_port":9000,
+  "framework":"mocha",
+  "src_files":"tests/feature/**/*_spec.js",
+  "serve_files":[
+    "node_modules/jquery/dist/jquery.js",
+    "node_modules/chai/chai.js",
+    "node_modules/chai-jquery/chai-jquery.js",
+    "tests/feature/phantomjs_shims.js",
+    "build/app_test_harness.js",
+    "tests/feature/setup.js",
+    "tests/feature/**/*_spec.js"
+  ],
+  "watch_files":[
+    "tests/**/*",
+    "js/**/*"
+  ],
+  "fail_on_zero_tests":true
+}

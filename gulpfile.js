@@ -1,9 +1,9 @@
 var gulp = require('gulp'),
+    path = require('path'),
     _ = require('underscore'),
     react = require('gulp-react'),
     concat = require('gulp-concat'),
     del = require('del'),
-    streamqueue = require('streamqueue'),
     sass = require('gulp-sass'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
@@ -37,19 +37,23 @@ gulp.task('copy', function () {
     .pipe(gulp.dest(BUILD_DIR));
 });
 
+var createBrowserifyTask = function(taskName, entryFile){
+  gulp.task(taskName, function() {
+    var bundler = browserify({
+        entries: [entryFile],
+        extensions: ['.jsx'],
+        debug: true
+      });
+    bundler.transform('reactify');
 
-gulp.task('browserify', function() {
-  var bundler = browserify({
-      entries: ['./js/app.js'],
-      extensions: ['.jsx'],
-      debug: true
-    });
-  bundler.transform('reactify');
+    bundler.bundle()
+      .pipe(source(path.basename(entryFile)))
+      .pipe(gulp.dest(BUILD_DIR));
+  });
+};
 
-  bundler.bundle()
-    .pipe(source('app.js'))
-    .pipe(gulp.dest(BUILD_DIR));
-});
+createBrowserifyTask('browserify','./js/app.js');
+createBrowserifyTask('build-feature-test-harness','./tests/feature/app_test_harness.js');
 
 gulp.task('test', function() {
   gulp.src(['tests/setup.js','tests/unit/**/*.js'],{read:false})

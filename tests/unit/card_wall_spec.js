@@ -1,4 +1,4 @@
-var CardWall = require('../../js/domain/card_wall');
+var CardWall = appRequire('domain/card_wall');
 
 describe('CardWall', function(){
   it('exists', function(){
