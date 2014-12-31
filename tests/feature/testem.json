@@ -15,7 +15,7 @@
   ],
   "watch_files":[
     "tests/**/*",
-    "js/**/*"
+    "build/app_test_harness.js"
   ],
   "fail_on_zero_tests":true
 }

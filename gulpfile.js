@@ -7,7 +7,8 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream'),
-    mocha = require('gulp-mocha');
+    mocha = require('gulp-mocha'),
+    shell = require('gulp-shell');
 
 var BUILD_DIR = 'build',
     FONT_AWESOME_INCLUDE_PATH = 'node_modules/font-awesome/scss';
@@ -55,7 +56,7 @@ var createBrowserifyTask = function(taskName, entryFile){
 createBrowserifyTask('browserify','./js/app.js');
 createBrowserifyTask('build-feature-test-harness','./tests/feature/app_test_harness.js');
 
-gulp.task('test', function() {
+gulp.task('unit-test', function() {
   gulp.src(['tests/setup.js','tests/unit/**/*.js'],{read:false})
     .pipe(mocha({
       ui: 'bdd',
@@ -72,11 +73,13 @@ gulp.task('sass', function () {
         .pipe(gulp.dest(BUILD_DIR));
 });
 
+gulp.task('build', ['copy','browserify','sass']);
+
 gulp.task('watch', ['default'], function(){
   var watchOpts = {debounceDelay:2000}, // workaround for editors saving file twice: http://stackoverflow.com/questions/21608480/gulp-js-watch-task-runs-twice-when-saving-files
       watchTargets = {
-    './js/**/*': ['test','browserify'],
-    './tests/**/*': ['test'],
+    './js/**/*': ['unit-test','browserify','build-feature-test-harness'],
+    './tests/unit/**/*': ['unit-test'],
     './scss/*.scss': ['sass'],
     './index.html': ['copy']
   };
@@ -86,4 +89,5 @@ gulp.task('watch', ['default'], function(){
   });
 });
 
-gulp.task('default', ['test','copy','browserify','sass']);
+
+gulp.task('default', ['clean','unit-test','build']);
