@@ -12,13 +12,13 @@
 
 # TODOs
 
-[ ] Local Storage
-[ ] Edit cards
-[ ] verify mobile UX
-[ ] deployment
-[ ] don't create empty cards
-[ ] trim cards on creation
-[ ] fix bug when using return to create a new card
-[ ] server-side storage
-[ ] support re-arranging cards
-[ ] support multiple walls
+- [ ] Local Storage
+- [ ] Edit cards
+- [ ] verify mobile UX
+- [ ] deployment
+- [ ] don't create empty cards
+- [ ] trim cards on creation
+- [ ] fix bug when using return to create a new card
+- [ ] server-side storage
+- [ ] support re-arranging cards
+- [ ] support multiple walls
