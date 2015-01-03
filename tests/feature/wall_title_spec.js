@@ -1,40 +1,27 @@
-var domAutomation = window.testHarness.domAutomation;
+var createAutomatorForApp = window.testHarness.createAutomatorForApp;
 
 describe( 'the wall title', function(){
-  var wallTitle;
+  var automator;
   beforeEach( function(){
-    var theApp = domAutomation( $(window.testHarness.bootIsolatedApp()) );
-    wallTitle = theApp.find(".title");
+    automator = createAutomatorForApp(window.testHarness.bootIsolatedApp());
   });
 
-  var clickWallTitle = function(){
-    wallTitle.find(".title-text").click();
-  }
-
   specify('a wall starts off with a sensible default title', function(){
-    wallTitle.expectTo().exist;
-    wallTitle.expectTo().have.text('The Wall');
+    automator.verifyWallTitleText('The Wall');
   });
 
   specify('a wall title can be edited', function(){
-    clickWallTitle();
-
-    var editBox = wallTitle.find('input[type=text]');
-
-    editBox.fillIn('A new wall title');
-    wallTitle.find('button.confirm').click();
-
-    wallTitle.expectTo().to.have.text('A new wall title');
+    automator.clickWallTitle();
+    automator.fillOutWallTitleEditBox('A new wall title');
+    automator.clickWallTitleConfirmButton();
+    automator.verifyWallTitleText('A new wall title');
   });
 
   specify('editing a wall title can be canceled', function(){
-    clickWallTitle();
-
-    wallTitle.find('input[type=text]').fillIn('A new wall title');
-    wallTitle.find('button.cancel').click();
-
-    wallTitle.find('input[type=text]').expectTo().not.exist;
-    wallTitle.expectTo().have.text('The Wall');
+    automator.clickWallTitle();
+    automator.fillOutWallTitleEditBox('A new wall title');
+    automator.clickWallTitleCancelButton();
+    automator.verifyWallTitleText('The Wall');
   });
 
 });

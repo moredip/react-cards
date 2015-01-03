@@ -11,6 +11,7 @@
     "tests/feature/phantomjs_shims.js",
     "build/app_test_harness.js",
     "tests/feature/setup.js",
+    "tests/feature/page_object.js",
     "tests/feature/**/*_spec.js"
   ],
   "watch_files":[

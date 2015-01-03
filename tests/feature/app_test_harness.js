@@ -1,5 +1,5 @@
 var createAppController = require( '../../js/app_controller' ),
-    domAutomation = require('./dom_automation');
+    createAutomatorForApp = require('./app_automator');
 
 var bootIsolatedApp = function(exposeOnPage){
   if (typeof exposeOnPage === 'undefined') exposeOnPage = false;
@@ -16,5 +16,5 @@ var bootIsolatedApp = function(exposeOnPage){
 
 window.testHarness = {
   bootIsolatedApp: bootIsolatedApp,
-  domAutomation: domAutomation
+  createAutomatorForApp: createAutomatorForApp
 };
